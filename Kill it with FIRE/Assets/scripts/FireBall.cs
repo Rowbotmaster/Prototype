@@ -17,9 +17,9 @@ public class FireBall : MonoBehaviour
 		
 	}
 
-	private void OncollisionEnter (Collision collision)
+	private void OnCollisionEnter (Collision collision)
 	{
-		Destroy (this.gameObject);
-		GameObject GO = Instantiate (fireLingPrefab, this.transform.position, Quaternion.identity);
+        GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
+        Destroy (this.gameObject);
 	}
 }
