@@ -53,7 +53,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -69,7 +68,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -111,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abf7a4a92b352248953eeb5ee262936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireLingPrefab: {fileID: 1734476125191240, guid: 3b3449bbf3fdb1f4b87b1d51dd68a104,
+    type: 2}
 --- !u!135 &135076030078648372
 SphereCollider:
   m_ObjectHideFlags: 1

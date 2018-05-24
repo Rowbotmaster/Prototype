@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireSpray : MonoBehaviour 
 {
+    // establishing variables
 	private float fireSpeed = 11f;
 	public GameObject firePrefab;
 	public Transform fireSpawnPoint;
@@ -19,9 +20,11 @@ public class FireSpray : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKey (KeyCode.F)) 
+        // Change this to left click when you get the chance
+        // when the fire button is held down balls of fire are spawned and arch out from the end of the flamethrower
+		if (Input.GetKey (KeyCode.Mouse0)) 
 		{
-			GameObject GO = Instantiate(firePrefab, fireSpawnPoint.position, Quaternion.identity) as GameObject;
+			GameObject GO = Instantiate(firePrefab, fireSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 			GO.GetComponent<Rigidbody>().AddForce(flameThrower.transform.forward * fireSpeed, ForceMode.Impulse);
 		}
 	}
