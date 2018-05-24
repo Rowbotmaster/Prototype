@@ -15,12 +15,14 @@ public class FireBall : MonoBehaviour
 
     public int fireBallDamage = 1;
 
+    private float countDown;
+
 
     // Use this for initialization
     void Start ()
     {
         // balls of fire delete themselves after 4 second if they haven't touched anything yet to prevent filling up the scene with balls
-		Destroy (this.gameObject, 4f);
+        countDown = (Time.time + 4);
 
         // tells the script how to find the PlayerScript
         player = GameObject.Find("FPS_Game").GetComponent<PlayerScript>();
@@ -28,7 +30,10 @@ public class FireBall : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Time.time == countDown)
+        {
+            SelfDestruct();
+        }
 	}
 
     private void OnTriggureEnter(Collider other)
@@ -69,6 +74,11 @@ public class FireBall : MonoBehaviour
         }
 
         // destroys the ball after spawning the fire
+        SelfDestruct();
+    }
+
+    void SelfDestruct()
+    {
         Destroy(this.gameObject);
     }
 }
