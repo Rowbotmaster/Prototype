@@ -13,70 +13,90 @@ public class FireBall : MonoBehaviour
     // tells the script that the PlayerScript exists
     private PlayerScript player;
 
+    // sets the damage that a fireball deals
     public int fireBallDamage = 1;
 
+    // used to delete the fireballs if they are in the scene for too long
     private float countDown;
 
 
     // Use this for initialization
     void Start ()
     {
-        // balls of fire delete themselves after 4 second if they haven't touched anything yet to prevent filling up the scene with balls
+
         countDown = (Time.time + 4);
 
-        // tells the script how to find the PlayerScript
+
         player = GameObject.Find("FPS_Game").GetComponent<PlayerScript>();
     }
 	
 	// Update is called once per frame
-	void Update () {
-		if (Time.time == countDown)
+	void Update ()
+    {
+
+        if (Time.time >= countDown)
         {
             SelfDestruct();
         }
 	}
 
+    //-------------------------------------------------
+    //OnTriggerEnter()
+    // called when this object enters another object that is a trigger and if the other object is a fire this object won't spawn another fire
+    // Param:
+    //      Collider other - the other object
+    // Return:
+    //      Void
+    //-------------------------------------------------
     private void OnTriggureEnter(Collider other)
     {
-        // tests if a fire is already here
         if (other.tag == "Fire")
         {
             flameOn = true;
         }
     }
 
-	private void OnCollisionEnter (Collision collision)
+    //-------------------------------------------------
+    //OnCollisionEnter()
+    // called when this object hits another object and either spawns a fire or tells the other object to run it's damage function
+    // Param:
+    //      Collision other - the other object
+    // Return:
+    //      Void
+    //-------------------------------------------------
+    private void OnCollisionEnter (Collision collision)
 	{
-        // if statement prevents fires stacking and fire spawning in the players face
+
         if (flameOn == false && collision.gameObject.tag == "Surface")
         {
-            // spawns the fires
+
             GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
         }
-
         if (collision.gameObject.tag == "Player")
         {
-            // finding the players health variable
+
             player.PlayerTakeDamage(fireBallDamage);
 
-            //tells the script not to make a lingering fire here
+
             flameOn = true;
         }
 
-        // if the player walks into a lingering fire they will take damage
+
         if (collision.gameObject.tag == "Enemy")
         {
-            // finding the players health variable
             collision.gameObject.GetComponent<EnemyScript>().EnemyTakeDamage(fireBallDamage);
 
-            //tells the script not to make a lingering fire here
             flameOn = true;
         }
-
-        // destroys the ball after spawning the fire
         SelfDestruct();
     }
 
+    //-------------------------------------------------
+    //SelfDestruct()
+    // called either when 4 seconds have passed or when this object hits another object
+    // Return:
+    //      Void
+    //-------------------------------------------------
     void SelfDestruct()
     {
         Destroy(this.gameObject);

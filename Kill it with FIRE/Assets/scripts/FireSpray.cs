@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class FireSpray : MonoBehaviour 
 {
-    // establishing variables
+    // how fast the fireballs will be traveling when that are created
 	private float fireSpeed = 11f;
+    // defines for the script what to create for the fireballs
 	public GameObject firePrefab;
+    // defines where the fireballs will initially be spawned
 	public Transform fireSpawnPoint;
+    // defines the flamethrower and uses said flamethrower to determin the direction the fireballs will travel
 	public GameObject flameThrower;
-
-
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-        // Change this to left click when you get the chance
-        // when the fire button is held down balls of fire are spawned and arch out from the end of the flamethrower
 		if (Input.GetKey (KeyCode.Mouse0)) 
 		{
-			GameObject GO = Instantiate(firePrefab, fireSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+            GameObject GO = Instantiate(firePrefab, fireSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 			GO.GetComponent<Rigidbody>().AddForce(flameThrower.transform.forward * fireSpeed, ForceMode.Impulse);
 		}
 	}
