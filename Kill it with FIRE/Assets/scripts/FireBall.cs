@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : MonoBehaviour 
+public class FireBall : MonoBehaviour
 {
     // referance for creating fires
     public GameObject fireLingPrefab;
-    
+
     // variables to prevent fire spawning in existing fires
     private bool flameOn = false;
 
@@ -21,7 +21,7 @@ public class FireBall : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
 
         countDown = (Time.time + 4);
@@ -29,16 +29,16 @@ public class FireBall : MonoBehaviour
 
         player = GameObject.Find("FPS_Game").GetComponent<PlayerScript>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
 
         if (Time.time >= countDown)
         {
             SelfDestruct();
         }
-	}
+    }
 
     //-------------------------------------------------
     //OnTriggerEnter()
@@ -60,12 +60,12 @@ public class FireBall : MonoBehaviour
     //OnCollisionEnter()
     // called when this object hits another object and either spawns a fire or tells the other object to run it's damage function
     // Param:
-    //      Collision other - the other object
+    //      Collision collision - the other object
     // Return:
     //      Void
     //-------------------------------------------------
-    private void OnCollisionEnter (Collision collision)
-	{
+    private void OnCollisionEnter(Collision collision)
+    {
 
         if (flameOn == false && collision.gameObject.tag == "Surface")
         {
