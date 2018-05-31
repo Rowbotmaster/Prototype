@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65612559338259604}
   - component: {fileID: 23328771234308328}
   - component: {fileID: 114020833234931746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: fire lingering
   m_TagString: Fire
   m_Icon: {fileID: 0}

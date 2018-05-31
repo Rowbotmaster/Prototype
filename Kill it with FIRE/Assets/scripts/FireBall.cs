@@ -10,9 +10,6 @@ public class FireBall : MonoBehaviour
     // variables to prevent fire spawning in existing fires
     private bool flameOn = false;
 
-    // tells the script that the PlayerScript exists
-    private PlayerScript player;
-
     // sets the damage that a fireball deals
     public int fireBallDamage = 1;
 
@@ -25,9 +22,6 @@ public class FireBall : MonoBehaviour
     {
 
         countDown = (Time.time + 4);
-
-
-        player = GameObject.Find("FPS_Game").GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -48,12 +42,33 @@ public class FireBall : MonoBehaviour
     // Return:
     //      Void
     //-------------------------------------------------
-    private void OnTriggureEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Fire")
         {
             flameOn = true;
         }
+
+        if (flameOn == false && other.gameObject.tag == "Surface")
+        {
+
+            GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
+        }
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerScript>().PlayerTakeDamage(fireBallDamage);
+
+            flameOn = true;
+        }
+
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<EnemyScript>().EnemyTakeDamage(fireBallDamage);
+
+            flameOn = true;
+        }
+        SelfDestruct();
     }
 
     //-------------------------------------------------
@@ -67,28 +82,26 @@ public class FireBall : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (flameOn == false && collision.gameObject.tag == "Surface")
-        {
+        //if (flameOn == false && collision.gameObject.tag == "Surface")
+        //{
 
-            GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
-        }
-        if (collision.gameObject.tag == "Player")
-        {
+        //    GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
+        //}
+        //if (collision.gameObject.tag == "Player")
+        //{
+        //    collision.gameObject.GetComponent<PlayerScript>().PlayerTakeDamage(fireBallDamage);
 
-            player.PlayerTakeDamage(fireBallDamage);
-
-
-            flameOn = true;
-        }
+        //    flameOn = true;
+        //}
 
 
-        if (collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<EnemyScript>().EnemyTakeDamage(fireBallDamage);
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    collision.gameObject.GetComponent<EnemyScript>().EnemyTakeDamage(fireBallDamage);
 
-            flameOn = true;
-        }
-        SelfDestruct();
+        //    flameOn = true;
+        //}
+        //SelfDestruct();
     }
 
     //-------------------------------------------------
