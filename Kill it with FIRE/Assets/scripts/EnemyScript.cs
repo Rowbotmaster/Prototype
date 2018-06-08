@@ -71,7 +71,7 @@ public class EnemyScript : MonoBehaviour
             theWay.destination = thePlayer.transform.position;
         }
 
-        if (unOof < Time.deltaTime)
+        if (unOof < Time.time)
         {
             UnOofNow();
         }
@@ -109,7 +109,7 @@ public class EnemyScript : MonoBehaviour
             enemyHealth -= damage;
 
             oof.SetActive(true);
-            unOof = Time.deltaTime + 0.1f;
+            unOof = Time.time + 0.1f;
 
             damageToTake = damage;
 
