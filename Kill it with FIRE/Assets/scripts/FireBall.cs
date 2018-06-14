@@ -14,7 +14,7 @@ public class FireBall : MonoBehaviour
     private PlayerScript player;
 
     // sets the damage that a fireball deals
-    public int fireBallDamage = 1;
+    public int fireBallDamage = 3;
 
     // used to delete the fireballs if they are in the scene for too long
     private float countDown;

@@ -30,7 +30,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject flameThrower;
 
     // stores the enemies current health value
-    public int enemyHealth = 25;
+    public int enemyHealth = 70;
 
     // records the damage that the enemy last took so it can be used for damage over time when thay are burning
     private int damageToTake;
@@ -43,12 +43,13 @@ public class EnemyScript : MonoBehaviour
     // prevents the player from taking damage from multiple sources at once and dying instantly
     private bool recentlyDamaged = false;
 
+    // turns the particle system attached to the enemy on
+    public GameObject enemyParticles;
+
 
     // Use this for initialization
     void Start()
     {
-        //NMA = GetComponent<NavMeshAgent>();
-        //NMA.destination = startNode.position;
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         theWay = GetComponent<NavMeshAgent>();
     }
@@ -84,7 +85,6 @@ public class EnemyScript : MonoBehaviour
         {
             if (hit.transform.tag == "Player")
             {
-                Debug.Log(hit.transform.name);
                 ShootFire();
             }
         }
@@ -117,6 +117,8 @@ public class EnemyScript : MonoBehaviour
 
 
             enemyIsBurning = true;
+
+            enemyParticles.SetActive(true);
 
 
             if (enemyHealth <= 0)
