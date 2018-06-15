@@ -41,7 +41,7 @@ public class FireBall : MonoBehaviour
 
     //-------------------------------------------------
     //OnTriggerEnter()
-    // called when this object enters another object that is a trigger and if the other object is a fire this object won't spawn another fire
+    // called when this object hits another object and either spawns a fire or tells the other object to run it's damage function
     // Param:
     //      Collider other - the other object
     // Return:
@@ -75,39 +75,6 @@ public class FireBall : MonoBehaviour
             flameOn = true;
         }
         SelfDestruct();
-    }
-
-    //-------------------------------------------------
-    //OnCollisionEnter()
-    // called when this object hits another object and either spawns a fire or tells the other object to run it's damage function
-    // Param:
-    //      Collision collision - the other object
-    // Return:
-    //      Void
-    //-------------------------------------------------
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        //if (flameOn == false && collision.gameObject.tag == "Surface")
-        //{
-
-        //    GameObject GO = Instantiate(fireLingPrefab, this.transform.position, Quaternion.identity);
-        //}
-        //if (collision.gameObject.tag == "Player")
-        //{
-        //    collision.gameObject.GetComponent<PlayerScript>().PlayerTakeDamage(fireBallDamage);
-
-        //    flameOn = true;
-        //}
-
-
-        //if (collision.gameObject.tag == "Enemy")
-        //{
-        //    collision.gameObject.GetComponent<EnemyScript>().EnemyTakeDamage(fireBallDamage);
-
-        //    flameOn = true;
-        //}
-        //SelfDestruct();
     }
 
     //-------------------------------------------------
